@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoHistory - Mockup</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Antetul aplicației -->
+  <header class="app-header">
+    <h1>AutoHistory</h1>
+    <p>Gestionare istoric și reparații service auto.</p>
+    <p class="app-count">3 elemente, dintre care 2 active</p>
+  </header>
+
+  <!-- Containerul principal -->
+  <main class="container">
+    
+    <!-- Secțiunea 1: Formularul de adăugare -->
+    <section class="panel">
+      <h2>Adaugă intervenție</h2>
+      <form class="item-form">
+        <label>
+          Titlu intervenție
+          <input type="text" name="titlu" placeholder="Ex: Schimb ulei și filtre" required />
+        </label>
+
+        <label>
+          Prioritate
+          <select name="eticheta">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+
+        <button type="submit">Adaugă</button>
+      </form>
+    </section>
+
+    <!-- Secțiunea 2: Lista cu cele 3 carduri -->
+    <section class="panel">
+      <h2>Istoric intervenții</h2>
+      <!-- Când lista e goală: <p class="empty">Nu există nicio intervenție înregistrată.</p> -->
+      <ul class="item-list">
+        
+        <!-- Card 1: Activ (Brake Inspection) -->
+        <li class="item-card">
+          <div>
+            <h3>Annual Brake Inspection</h3>
+            <span class="badge badge-high">High</span>
+          </div>
+          <span class="status">Activ</span>
+        </li>
+
+        <!-- Card 2: Finalizat (Oil & Filter Change) -->
+        <li class="item-card done">
+          <div>
+            <h3>Oil & Filter Change</h3>
+            <span class="badge badge-medium">Medium</span>
+          </div>
+          <span class="status">Gata</span>
+        </li>
+
+        <!-- Card 3: Activ (Wheel Alignment) -->
+        <li class="item-card">
+          <div>
+            <h3>Wheel Alignment & Balancing</h3>
+            <span class="badge badge-low">Low</span>
+          </div>
+          <span class="status">Activ</span>
+        </li>
+
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Subsolul aplicației -->
+  <footer class="app-footer">Proiect Tehnologii Web</footer>
+
+</body>
+</html>
