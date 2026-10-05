@@ -1,0 +1,272 @@
+/* ==========================================
+   4.1. Reset și Variabile globale (Design Modern Unic)
+   ========================================== */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Culori de bază - Fundal mai cald, text profund */
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: #334155;
+
+  /* Culoare de accent vibrantă (Indigo & Neon Neon-ish) */
+  --accent: #6366f1;
+  --accent-dark: #4f46e5;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+
+  /* Culori dedicate pentru etichete (Priorități - stil Dark Mode / Soft Glow) */
+  --badge-high-bg: rgba(239, 68, 68, 0.15);
+  --badge-high-text: #f87171;
+
+  --badge-medium-bg: rgba(245, 158, 11, 0.15);
+  --badge-medium-text: #fbbf24;
+
+  --badge-low-bg: rgba(16, 185, 129, 0.15);
+  --badge-low-text: #34d399;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ==========================================
+   4.2. Antetul (Header Modern)
+   ========================================== */
+.app-header {
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+  color: #ffffff;
+  text-align: center;
+  padding: 48px 20px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.25);
+}
+
+.app-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.app-header p {
+  margin: 4px 0;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+.app-count {
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 8px;
+  backdrop-filter: blur(4px);
+}
+
+/* ==========================================
+   4.3. Layout principal cu două coloane (Asimetric și Dinamic)
+   ========================================== */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ==========================================
+   4.4. Panourile (Efect de Card Modern)
+   ========================================== */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.panel h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #f1f5f9;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+}
+
+/* ==========================================
+   4.5. Formularul de adăugare (Interactiv)
+   ========================================== */
+.item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.item-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.item-form input[type="text"],
+.item-form select {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background-color: #0f172a;
+  color: var(--text);
+  transition: all 0.2s ease;
+}
+
+.item-form input[type="text"]:focus,
+.item-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.item-form button {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  margin-top: 6px;
+}
+
+.item-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
+}
+
+.item-form button:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================
+   4.6. Lista și Cardurile
+   ========================================== */
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #0f172a;
+  transition: all 0.2s ease;
+}
+
+.item-card:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.item-card h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.status {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ==========================================
+   4.7. Etichetele colorate (Badges)
+   ========================================== */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-high {
+  background-color: var(--badge-high-bg);
+  color: var(--badge-high-text);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.badge-medium {
+  background-color: var(--badge-medium-bg);
+  color: var(--badge-medium-text);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.badge-low {
+  background-color: var(--badge-low-bg);
+  color: var(--badge-low-text);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* ==========================================
+   4.8. Elementul finalizat (.done)
+   ========================================== */
+.item-card.done {
+  opacity: 0.6;
+}
+
+.item-card.done h3 {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+/* ==========================================
+   4.9. Subsolul și Responsivitatea (Ecrane înguste)
+   ========================================== */
+.app-footer {
+  text-align: center;
+  padding: 32px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+@media (max-width: 850px) {
+  .container {
+    grid-template-columns: 1fr;
+    margin: 20px auto;
+  }
+}
