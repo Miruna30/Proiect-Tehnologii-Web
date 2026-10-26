@@ -313,3 +313,77 @@ body {
   font-style: italic;
   padding: 20px 0;
 }
+
+/* Stiluri adăugate în Etapa 5: Checkbox și buton de ștergere */
+.item-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.item-main input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.btn-danger {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Butonul de comutare a temei în colțul antetului */
+.app-header {
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Suport pentru comutarea explicită a temei întunecate */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14121d;
+    --card: #1e1b2e;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #352f4d;
+    --accent-soft: #2a2342;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14121d;
+  --card: #1e1b2e;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #352f4d;
+  --accent-soft: #2a2342;
+}

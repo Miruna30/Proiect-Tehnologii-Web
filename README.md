@@ -29,6 +29,9 @@ The list is rendered from the data, through two components:
 - `InterventieList` receives the whole array and renders one card per item
 - `InterventieCard` receives a single item through props and displays it
 
+## Stage 5: local state and events
+The list lives in React state. Checking and deleting work from the page, and the counters in the header follow automatically. A button in the header switches between light and dark mode. Changes are lost on refresh, which is what stage 6 and stage 10 fix.
+
 ## How to run
 cd frontend
 npm install
@@ -48,7 +51,7 @@ Details per stage: see the `ai-log/` folder.
 - [x] Stage 2: data logic in JavaScript
 - [x] Stage 3: Vite and React project
 - [x] Stage 4: components rendered from data
-- [ ] Stage 5: local state and events
+- [x] Stage 5: local state and events
 
 ### Checklist Etapa 1
 | ID | Requirement | Where (permalink) | How to check |
@@ -94,3 +97,15 @@ Details per stage: see the `ai-log/` folder.
 | S4-R5 | state changes the card look | frontend/src/components/InterventieCard.jsx#L.. | toggle a done flag |
 | S4-R6 | README Stage 4 section + AI log | README.md, ai-log/etapa-04.md | read |
 | S4-R7 | commit "Stage 4" pushed | link to the commit | commit history |
+
+### Checklist Etapa 5
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S5-R1 | list kept in useState, in App | frontend/src/App.jsx#L.. | read |
+| S5-R2 | toggling changes state and card look | frontend/src/App.jsx#L..-L.., frontend/src/components/InterventieCard.jsx#L.. | click a checkbox |
+| S5-R3 | delete removes the item | frontend/src/App.jsx#L..-L.., frontend/src/components/InterventieCard.jsx#L.. | click Delete |
+| S5-R4 | header counter derived, not in state | frontend/src/App.jsx#L.. | toggle, watch header |
+| S5-R5 | immutable updates (no push, splice, assignment) | frontend/src/App.jsx#L..-L.. | read |
+| S5-R6 | light/dark toggle: state + data-theme on html | frontend/src/App.jsx#L..-L.., frontend/src/App.css#L..-L.. | click the button, both system themes |
+| S5-R7 | no console warnings; README + AI log | README.md, ai-log/etapa-05.md | F12, Console |
+| S5-R8 | commit "Stage 5" pushed | link to the commit | commit history |
