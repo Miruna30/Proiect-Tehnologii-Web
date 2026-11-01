@@ -1,112 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
 * {
   box-sizing: border-box;
 }
 
+/* ==========================================
+   Variabile de culoare — TEMA ÎNTUNECATĂ (implicită)
+   Inspirat de Davic Auto: negru cărbune + portocaliu + alb
+   ========================================== */
 :root {
-  /* Culori de bază - Fundal mai cald, text profund */
-  --bg: #0f172a;
-  --card: #1e293b;
-  --text: #f8fafc;
-  --muted: #94a3b8;
-  --border: #334155;
+  --bg: #0b0b0d;
+  --card: #151518;
+  --card-2: #0f0f12;
+  --text: #f5f5f5;
+  --muted: #a1a1aa;
+  --border: #2a2a2f;
 
-  /* Culoare de accent vibrantă (Indigo & Neon Neon-ish) */
-  --accent: #6366f1;
-  --accent-dark: #4f46e5;
-  --accent-soft: rgba(99, 102, 241, 0.15);
+  --accent: #faa61f;
+  --accent-dark: #e8890c;
+  --accent-soft: rgba(250, 166, 31, 0.15);
+  --on-accent: #111111;
 
-  /* Culori dedicate pentru etichete (Priorități - stil Dark Mode / Soft Glow) */
+  --heading-font: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+
   --badge-high-bg: rgba(239, 68, 68, 0.15);
   --badge-high-text: #f87171;
-
-  --badge-medium-bg: rgba(245, 158, 11, 0.15);
+  --badge-medium-bg: rgba(250, 166, 31, 0.15);
   --badge-medium-text: #fbbf24;
-
   --badge-low-bg: rgba(16, 185, 129, 0.15);
   --badge-low-text: #34d399;
+
+  --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.7);
+  --glow: 0 8px 24px rgba(250, 166, 31, 0.35);
+}
+
+/* Tema luminoasă (activată din buton) */
+:root[data-theme="light"] {
+  --bg: #f4f4f2;
+  --card: #ffffff;
+  --card-2: #fafaf8;
+  --text: #16161a;
+  --muted: #6b6b73;
+  --border: #e3e2de;
+  --accent-soft: rgba(250, 166, 31, 0.18);
+
+  --badge-high-text: #b91c1c;
+  --badge-medium-text: #b45309;
+  --badge-low-text: #047857;
+
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  --glow: 0 8px 24px rgba(250, 166, 31, 0.4);
 }
 
 body {
   margin: 0;
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
 }
 
 /* ==========================================
-   4.2. Antetul (Header Modern)
+   Antetul — „hero" cu fundal de service auto
+   Pune o fotografie în public/hero.jpg și apare automat.
+   Fără poză, rămâne fundalul generat din gradiente (hală cu neoane).
    ========================================== */
 .app-header {
-  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
-  color: #ffffff;
+  position: relative;
+  overflow: hidden;
   text-align: center;
-  padding: 48px 20px;
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.25);
+  color: #ffffff;
+  padding: 110px 20px 90px;
+  border-bottom: 3px solid var(--accent);
+  background-color: #0b0b0d;
+  background-image:
+    /* întunecare peste poză, ca în referință */
+    linear-gradient(180deg, rgba(8, 8, 10, 0.55) 0%, rgba(8, 8, 10, 0.8) 100%),
+    /* fotografia (opțională): public/hero.jpg */
+    url("/hero.jpg"),
+    /* neoane de hală (bare de lumină înclinate) */
+    linear-gradient(172deg, transparent 18%, rgba(255, 255, 255, 0.16) 18.4%, rgba(255, 255, 255, 0.16) 19.6%, transparent 20%),
+    linear-gradient(172deg, transparent 31%, rgba(255, 255, 255, 0.12) 31.4%, rgba(255, 255, 255, 0.12) 32.4%, transparent 33%),
+    linear-gradient(172deg, transparent 46%, rgba(255, 255, 255, 0.09) 46.3%, rgba(255, 255, 255, 0.09) 47.1%, transparent 47.5%),
+    /* lumină caldă în colț și vignetă */
+    radial-gradient(ellipse at 85% 20%, rgba(250, 166, 31, 0.28) 0%, transparent 45%),
+    radial-gradient(ellipse at 15% 90%, rgba(120, 120, 130, 0.25) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1a1f 0%, #0b0b0d 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .app-header h1 {
-  margin: 0 0 8px 0;
-  font-size: 2.25rem;
+  margin: 0 0 12px 0;
+  font-family: var(--heading-font);
+  font-size: clamp(2.8rem, 7vw, 4.8rem);
   font-weight: 800;
-  letter-spacing: -0.025em;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: #ffffff;
 }
 
 .app-header p {
-  margin: 4px 0;
+  margin: 4px auto;
+  max-width: 640px;
   font-weight: 400;
-  opacity: 0.95;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .app-count {
-  font-size: 0.85rem;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 4px 12px;
-  border-radius: 20px;
   display: inline-block;
-  margin-top: 8px;
+  margin-top: 18px !important;
+  padding: 6px 16px;
+  border: 1px solid rgba(250, 166, 31, 0.55);
+  border-radius: 6px;
+  background: rgba(250, 166, 31, 0.12);
+  color: var(--accent) !important;
+  font-family: var(--heading-font);
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   backdrop-filter: blur(4px);
 }
 
+/* Butonul de comutare a temei — colțul antetului, ca meniul din referință */
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
 /* ==========================================
-   4.3. Layout principal cu două coloane (Asimetric și Dinamic)
+   Layout principal
    ========================================== */
 .container {
   max-width: 1000px;
-  margin: 24px auto;
+  margin: 32px auto;
   padding: 0 16px;
   display: grid;
-  /* Etapa 3: doar panoul cu date; a doua coloană revine în Etapa 7 */
   grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
 }
 
 /* ==========================================
-   4.4. Panourile (Efect de Card Modern)
+   Panourile
    ========================================== */
 .panel {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  border-top: 3px solid var(--accent);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: var(--shadow-card);
 }
 
 .panel h2 {
   margin-top: 0;
   margin-bottom: 20px;
-  font-size: 1.2rem;
+  padding-bottom: 12px;
+  font-family: var(--heading-font);
+  font-size: 1.7rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #f1f5f9;
-  border-bottom: 2px solid var(--border);
-  padding-bottom: 10px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
 }
 
 /* ==========================================
-   4.5. Formularul de adăugare (Interactiv)
+   Formularul
    ========================================== */
 .item-form {
   display: flex;
@@ -119,9 +200,9 @@ body {
   flex-direction: column;
   gap: 8px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
@@ -131,7 +212,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 10px;
   font-size: 0.95rem;
-  background-color: #0f172a;
+  background-color: var(--card-2);
   color: var(--text);
   transition: all 0.2s ease;
 }
@@ -144,22 +225,25 @@ body {
 }
 
 .item-form button {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-  color: #ffffff;
-  border: none;
-  padding: 14px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
   margin-top: 6px;
+  padding: 15px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--heading-font);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: var(--glow);
+  transition: transform 0.1s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .item-form button:hover {
+  background: var(--accent-dark);
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
 }
 
 .item-form button:active {
@@ -167,7 +251,7 @@ body {
 }
 
 /* ==========================================
-   4.6. Lista și Cardurile
+   Lista și cardurile
    ========================================== */
 .item-list {
   list-style: none;
@@ -184,21 +268,23 @@ body {
   align-items: center;
   padding: 16px 20px;
   border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
   border-radius: 12px;
-  background: #0f172a;
+  background: var(--card-2);
   transition: all 0.2s ease;
 }
 
 .item-card:hover {
   border-color: var(--accent);
   transform: translateX(4px);
-  background: rgba(30, 41, 59, 0.7);
+  background: var(--accent-soft);
 }
 
 .item-card h3 {
-  margin: 0 0 4px 0;
+  margin: 0 0 6px 0;
   font-size: 1.05rem;
   font-weight: 600;
+  color: var(--text);
 }
 
 .status {
@@ -208,41 +294,43 @@ body {
 }
 
 /* ==========================================
-   4.7. Etichetele colorate (Badges)
+   Etichetele (badges)
    ========================================== */
 .badge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-family: var(--heading-font);
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .badge-high {
   background-color: var(--badge-high-bg);
   color: var(--badge-high-text);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.35);
 }
 
 .badge-medium {
   background-color: var(--badge-medium-bg);
   color: var(--badge-medium-text);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(250, 166, 31, 0.4);
 }
 
 .badge-low {
   background-color: var(--badge-low-bg);
   color: var(--badge-low-text);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.35);
 }
 
 /* ==========================================
-   4.8. Elementul finalizat (.done)
+   Element finalizat (.done)
    ========================================== */
 .item-card.done {
-  opacity: 0.6;
+  opacity: 0.55;
+  border-left-color: var(--border);
 }
 
 .item-card.done h3 {
@@ -251,25 +339,8 @@ body {
 }
 
 /* ==========================================
-   4.9. Subsolul și Responsivitatea (Ecrane înguste)
+   Acțiuni, checkbox, buton de ștergere
    ========================================== */
-.app-footer {
-  text-align: center;
-  padding: 32px;
-  color: var(--muted);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--border);
-  margin-top: 40px;
-}
-
-@media (max-width: 850px) {
-  .container {
-    grid-template-columns: 1fr;
-    margin: 20px auto;
-  }
-}
-
-/* Stiluri pentru acțiunile din Card */
 .card-actions {
   display: flex;
   align-items: center;
@@ -294,7 +365,7 @@ body {
 
 .btn-toggle:hover {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .btn-delete {
@@ -314,76 +385,70 @@ body {
   padding: 20px 0;
 }
 
-/* Stiluri adăugate în Etapa 5: Checkbox și buton de ștergere */
 .item-main {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
 }
 
 .item-main input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   accent-color: var(--accent);
   cursor: pointer;
 }
 
 .btn-danger {
+  padding: 7px 16px;
   border: 1px solid var(--accent);
+  border-radius: 999px;
   background: transparent;
   color: var(--accent);
-  border-radius: 8px;
-  padding: 6px 12px;
   font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .btn-danger:hover {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 
-/* Butonul de comutare a temei în colțul antetului */
-.app-header {
-  position: relative;
+/* ==========================================
+   Subsol și responsivitate
+   ========================================== */
+.app-footer {
+  margin-top: 40px;
+  padding: 32px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--border);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-  background: transparent;
-  color: #fff;
-  font: inherit;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Suport pentru comutarea explicită a temei întunecate */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #14121d;
-    --card: #1e1b2e;
-    --text: #e5e7eb;
-    --muted: #9ca3af;
-    --border: #352f4d;
-    --accent-soft: #2a2342;
+@media (max-width: 850px) {
+  .container {
+    grid-template-columns: 1fr;
+    margin: 20px auto;
   }
 }
 
-:root[data-theme="dark"] {
-  --bg: #14121d;
-  --card: #1e1b2e;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --border: #352f4d;
-  --accent-soft: #2a2342;
+@media (max-width: 600px) {
+  .app-header {
+    padding: 90px 16px 60px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .item-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }
